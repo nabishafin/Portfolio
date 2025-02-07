@@ -47,7 +47,7 @@ const Navbar = () => {
                         </div>
                         <motion.ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                            className="menu menu-sm dropdown-content bg-black text-white rounded-box z-[1] mt-3 w-52 p-2 shadow"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.3 }}>
@@ -72,7 +72,7 @@ const Navbar = () => {
                     <motion.a
                         href="/Nabi Shafin Professional CV Resume.pdf" // Corrected the path to the resume file
                         download="Mahamodon_Nabi_Shafin_Resume.pdf" // Optional: Name the file when downloading
-                        className='btn bg-white text-indigo-500 px-6 py-2 rounded-md font-bold hover:bg-indigo-100 transition-colors duration-300 mt-2'
+                        className='btn bg-black text-indigo-500 px-6 py-2 rounded-md font-bold hover:bg-indigo-100 transition-colors duration-300 mt-2'
                         whileHover={{ scale: 1.1 }} // Added simple hover effect
                     >
                         Resume
