@@ -10,7 +10,7 @@ import Contact from '../components/Contact';
 
 const Home = () => {
     return (
-        <div>
+        <div className='bg-gradient-to-r from-black via-purple-950 to-black'>
             <Navbar></Navbar>
             <Banner></Banner>
             <AboutMe></AboutMe>
