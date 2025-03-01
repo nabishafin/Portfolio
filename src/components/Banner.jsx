@@ -49,7 +49,7 @@ const Banner = () => {
                 </motion.div>
                 {/* Resume Button with download functionality */}
                 <motion.a
-                    href="/public/Nabi Shafin Professional CV Resume.pdf" // Path to your resume in the public folder
+                    href="/public/Mahamodon Nabi Shafin Resume.pdf" // Path to your resume in the public folder
                     download="Mahamodon_Nabi_Shafin_Resume.pdf" // Optional: Name the file when downloading
                     className='btn bg-black text-indigo-500 px-6 py-2 rounded-md font-bold hover:bg-indigo-100 transition-colors duration-300 mt-2'
                     variants={itemVariants}
