@@ -70,13 +70,14 @@ const Navbar = () => {
                 <div className="navbar-end">
                     {/* Resume Button with download functionality */}
                     <motion.a
-                        href="/public/Mahamodon Nabi Shafin Resume.pdf" // Corrected the path to the resume file
-                        download="Mahamodon_Nabi_Shafin_Resume.pdf" // Optional: Name the file when downloading
+                        href="/public/Mahamodon_Nabi_Shafin_Resume.pdf" // Use underscores in the file name
+                        download="Mahamodon_Nabi_Shafin_Resume.pdf" // Consistent file naming
                         className='btn bg-black text-indigo-500 px-6 py-2 rounded-md font-bold hover:bg-indigo-100 transition-colors duration-300 mt-2'
-                        whileHover={{ scale: 1.1 }} // Added simple hover effect
+                        whileHover={{ scale: 1.1 }} // Simple hover effect
+                        aria-label="Download Mahamodon Nabi Shafin's Resume" // Accessibility improvement
                     >
                         Resume
-                    </motion.a> {/* Styled button */}
+                    </motion.a>
                 </div>
             </div>
         </div>

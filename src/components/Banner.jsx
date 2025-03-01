@@ -49,15 +49,15 @@ const Banner = () => {
                 </motion.div>
                 {/* Resume Button with download functionality */}
                 <motion.a
-                    href="/public/Mahamodon Nabi Shafin Resume.pdf" // Path to your resume in the public folder
+                    href="/public/Mahamodon_Nabi_Shafin_Resume.pdf" // Ensure the path is correct
                     download="Mahamodon_Nabi_Shafin_Resume.pdf" // Optional: Name the file when downloading
                     className='btn bg-black text-indigo-500 px-6 py-2 rounded-md font-bold hover:bg-indigo-100 transition-colors duration-300 mt-2'
                     variants={itemVariants}
                     key="button-key"
+                    aria-label="Download Mahamodon Nabi Shafin's Resume" // Improve accessibility
                 >
                     Download Resume
-                </motion.a> {/* Styled button */}
-
+                </motion.a>
             </motion.div>
 
             {/* Animated Image Block */}
