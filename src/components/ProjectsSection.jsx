@@ -35,7 +35,38 @@ const ProjectsSection = () => {
                 "Toastify (for notifications)",
                 "Axios"
             ],
-            image: "https://i.ibb.co.com/1GLtSrPn/Whats-App-Image-2025-02-07-at-2-23-12-PM.jpg",  // Update or ensure this URL is correct
+            image: "https://i.ibb.co.com/rRP37rfm/Whats-App-Image-2025-03-02-at-2-47-28-AM.jpg",  // Update or ensure this URL is correct
+        },
+        {
+            name: "service-review-system",
+            description: "A full-stack platform where users can log in, add services, and post reviews. Users can manage their reviews and explore feedback on their listed services. Built with user authentication, CRUD operations, and secure database interactions, this project offers hands-on experience in creating a robust review-sharing platform.",
+            liveSite: "https://service-review-system-clint.web.app",
+            githubClient: "https://github.com/nabishafin/Service-Review-System-Client.git",
+            githubServer: "https://github.com/nabishafin/Service-Review-System-Server.git",
+            technologies: [
+                "React",
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "Node.js",
+                "Express.js",
+                "MongoDB",
+                "Firebase",
+                "React Router",
+                "React Simple Star Rating",
+                "Axios",
+                "Nodemon",
+                "Tailwind CSS",
+                "Git",
+                "SweetAlert",
+                "MongoDB Atlas",
+                "Cors",
+                "React Context API",
+                "ESLint",
+                "Toastify (for notifications)",
+                "Axios"
+            ],
+            image: "https://i.ibb.co.com/zhky0s42/service-review-system-clint-web-app-Nest-Hub-Max.png",
         },
         {
             name: "Movieverse",
@@ -68,27 +99,7 @@ const ProjectsSection = () => {
             ],
             image: "https://i.ibb.co.com/fzLtrny3/movieverse-f8eae-web-app-Nest-Hub-Max-2.png",
         },
-        {
-            name: "Expense-Tracker",
-            description: "The Expense Tracker is a web-based application designed to help individuals track their income, expenses, and overall budget. It provides an easy-to-use interface to record financial transactions, categorize spending, and visualize financial data through charts and graphs. The app empowers users to manage their personal finances by offering insights into their spending habits and allowing them to set and stick to budgets for various expense categories.",
-            liveSite: "https://marvelous-churros-f5daab.netlify.app/",
-            githubClient: "https://github.com/nabishafin/expense-tracker.git",
-            githubServer: "https://github.com/nabishafin/expense-tracker.git",
-            technologies: ["React",
-                "HTML",
-                "CSS",
-                "JavaScript",
-                "Tailwind CSS",
-                "Git",
-                "SweetAlert",
-                "MongoDB Atlas",
-                "Cors",
-                "React Context API",
-                "ESLint",
-                "Toastify (for notifications)",
-                "Axios"],
-            image: "https://i.ibb.co.com/JSx3VGm/trcker.png",  // Update or ensure this URL is correct
-        },
+
     ];
 
     // Detect screen size for mobile responsiveness
