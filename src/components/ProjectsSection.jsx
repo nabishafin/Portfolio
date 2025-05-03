@@ -9,9 +9,8 @@ const ProjectsSection = () => {
         {
             name: "Nostrix Client",
             description: "DiscussHub is a dynamic forum platform developed with the MERN stack, aimed at creating engaging user interactions in a community-driven environment. Users can share posts, engage in discussions, upvote or downvote content, and explore posts via tags. With features like user profiles, real-time notifications, and an interactive commenting system, DiscussHub is designed to facilitate vibrant discussions across various topics and niches.",
-            liveSite: "https://discusshub-b96dc.web.app",
-            githubClient: "https://github.com/nabishafin/discussHub-client.git",
-            githubServer: "https://github.com/nabishafin/discussHub-Server.git",
+            liveSite: "https://nostrix-client.vercel.app",
+            githubClient: "https://github.com/nabishafin/Nostrix-Client.git",
             technologies: [
                 "React",
                 "HTML",
@@ -35,7 +34,7 @@ const ProjectsSection = () => {
                 "Toastify (for notifications)",
                 "Axios"
             ],
-            image: "https://i.ibb.co.com/rRP37rfm/Whats-App-Image-2025-03-02-at-2-47-28-AM.jpg",  // Update or ensure this URL is correct
+            image: "https://i.ibb.co.com/wZdfh25z/nostrix-client-vercel-app-Nest-Hub-Max.png",  // Update or ensure this URL is correct
         },
         {
             name: "DiscussHub",
@@ -207,9 +206,11 @@ const ProjectsSection = () => {
                                 <motion.a href={selectedProject.githubClient} target="_blank" className="btn bg-green-500 text-white px-6 py-2 rounded-md font-bold hover:bg-green-400">
                                     GitHub Client
                                 </motion.a>
-                                <motion.a href={selectedProject.githubServer} target="_blank" className="btn bg-yellow-500 text-white px-6 py-2 rounded-md font-bold hover:bg-yellow-400">
-                                    GitHub Server
-                                </motion.a>
+                                {
+                                    selectedProject?.githubServer ? <motion.a href={selectedProject.githubServer} target="_blank" className="btn bg-yellow-500 text-white px-6 py-2 rounded-md font-bold hover:bg-yellow-400">
+                                        GitHub Server
+                                    </motion.a> : ''
+                                }
                             </div>
                         </>
                     ) : (
