@@ -49,12 +49,12 @@ const Banner = () => {
                 </motion.div>
                 {/* Resume Button with download functionality */}
                 <motion.a
-                    href="/Mahamodon Nabi Shafin Frontend  Resume.pdf" // Ensure the path is correct
-                    download="Mahamodon_Nabi_Shafin_Resume.pdf" // Optional: Name the file when downloading
+                    href="/Mahamodon Nabi Shafin Frontend  Resume.pdf"
+                    download="Mahamodon Nabi Shafin Frontend  Resume.pdf"
                     className='btn bg-black text-indigo-500 px-6 py-2 rounded-md font-bold hover:bg-indigo-100 transition-colors duration-300 mt-2'
                     variants={itemVariants}
                     key="button-key"
-                    aria-label="Download Mahamodon Nabi Shafin's Resume" // Improve accessibility
+                    aria-label="Download Mahamodon Nabi Shafin's Resume"
                 >
                     Download Resume
                 </motion.a>
@@ -64,14 +64,14 @@ const Banner = () => {
             <motion.div
                 className='flex justify-end items-end'
                 variants={itemVariants}
-                key="image-key" // Adding key to force reanimation
+                key="image-key"
             >
                 <motion.img
-                    className='w-full md:w-4/6 rounded-lg shadow-lg' // Added rounded corners and shadow
+                    className='w-full md:w-4/6 rounded-lg shadow-lg'
                     src="https://i.ibb.co.com/KcxB5Qj0/Adobe-Express-file.png"
-                    alt="Shafin"  // Added alt text for accessibility
-                    whileHover={{ scale: 1.05 }} // Scale on hover
-                    transition={{ duration: 0.3 }} // Smooth transition
+                    alt="Shafin"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
                 />
             </motion.div>
         </motion.section>

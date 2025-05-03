@@ -7,6 +7,37 @@ const ProjectsSection = () => {
 
     const projects = [
         {
+            name: "Nostrix Client",
+            description: "DiscussHub is a dynamic forum platform developed with the MERN stack, aimed at creating engaging user interactions in a community-driven environment. Users can share posts, engage in discussions, upvote or downvote content, and explore posts via tags. With features like user profiles, real-time notifications, and an interactive commenting system, DiscussHub is designed to facilitate vibrant discussions across various topics and niches.",
+            liveSite: "https://discusshub-b96dc.web.app",
+            githubClient: "https://github.com/nabishafin/discussHub-client.git",
+            githubServer: "https://github.com/nabishafin/discussHub-Server.git",
+            technologies: [
+                "React",
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "Node.js",
+                "Express.js",
+                "MongoDB",
+                "Firebase",
+                "React Router",
+                "React Simple Star Rating",
+                "Axios",
+                "Nodemon",
+                "Tailwind CSS",
+                "Git",
+                "SweetAlert",
+                "MongoDB Atlas",
+                "Cors",
+                "React Context API",
+                "ESLint",
+                "Toastify (for notifications)",
+                "Axios"
+            ],
+            image: "https://i.ibb.co.com/rRP37rfm/Whats-App-Image-2025-03-02-at-2-47-28-AM.jpg",  // Update or ensure this URL is correct
+        },
+        {
             name: "DiscussHub",
             description: "DiscussHub is a dynamic forum platform developed with the MERN stack, aimed at creating engaging user interactions in a community-driven environment. Users can share posts, engage in discussions, upvote or downvote content, and explore posts via tags. With features like user profiles, real-time notifications, and an interactive commenting system, DiscussHub is designed to facilitate vibrant discussions across various topics and niches.",
             liveSite: "https://discusshub-b96dc.web.app",
