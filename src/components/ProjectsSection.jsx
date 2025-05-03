@@ -7,8 +7,8 @@ const ProjectsSection = () => {
 
     const projects = [
         {
-            name: "Nostrix Client",
-            description: "DiscussHub is a dynamic forum platform developed with the MERN stack, aimed at creating engaging user interactions in a community-driven environment. Users can share posts, engage in discussions, upvote or downvote content, and explore posts via tags. With features like user profiles, real-time notifications, and an interactive commenting system, DiscussHub is designed to facilitate vibrant discussions across various topics and niches.",
+            name: "Nostrix Creative",
+            description: "Nostrix Creative is a modern digital agency website developed using the latest front-end technologies. Built with React for dynamic user interfaces and Tailwind CSS combined with DaisyUI for a sleek, responsive design, the site offers a smooth and engaging experience across all devices. React Router enables seamless navigation between pages, while EmailJS handles contact form submissions directly from the frontend—no backend required. The overall stack ensures high performance, clean design, and strong functionality for showcasing digital services.",
             liveSite: "https://nostrix-client.vercel.app",
             githubClient: "https://github.com/nabishafin/Nostrix-Client.git",
             technologies: [
@@ -109,10 +109,6 @@ const ProjectsSection = () => {
                 "HTML",
                 "CSS",
                 "JavaScript",
-                "Node.js",
-                "Express.js",
-                "MongoDB",
-                "Firebase",
                 "React Router",
                 "React Simple Star Rating",
                 "Axios",
