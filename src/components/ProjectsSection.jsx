@@ -57,7 +57,7 @@ const ProjectsSection = () => {
                 "Toastify (for notifications)",
                 "Axios"
             ],
-            image: { disscussHub }
+            image: disscussHub
         },
         {
             name: "service-review-system",
@@ -88,7 +88,7 @@ const ProjectsSection = () => {
                 "Toastify (for notifications)",
                 "Axios"
             ],
-            image: { system }
+            image: system
         },
         {
             name: "Movieverse",
