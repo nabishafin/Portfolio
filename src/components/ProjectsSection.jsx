@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import disscussHub from '../assets/discuss banner.png';
+import system from '../assets/system-banner.png';
 
 const ProjectsSection = () => {
     const [selectedProject, setSelectedProject] = useState(null);
@@ -29,7 +31,7 @@ const ProjectsSection = () => {
         {
             name: "DiscussHub",
             description: "DiscussHub is a dynamic forum platform developed with the MERN stack, aimed at creating engaging user interactions in a community-driven environment. Users can share posts, engage in discussions, upvote or downvote content, and explore posts via tags. With features like user profiles, real-time notifications, and an interactive commenting system, DiscussHub is designed to facilitate vibrant discussions across various topics and niches.",
-            liveSite: "https://discusshub-b96dc.web.app",
+            liveSite: "https://discuss-hub-client.vercel.app",
             githubClient: "https://github.com/nabishafin/discussHub-client.git",
             githubServer: "https://github.com/nabishafin/discussHub-Server.git",
             technologies: [
@@ -55,12 +57,12 @@ const ProjectsSection = () => {
                 "Toastify (for notifications)",
                 "Axios"
             ],
-            image: "https://i.ibb.co.com/rRP37rfm/Whats-App-Image-2025-03-02-at-2-47-28-AM.jpg",  // Update or ensure this URL is correct
+            image: { disscussHub }
         },
         {
             name: "service-review-system",
             description: "A full-stack platform where users can log in, add services, and post reviews. Users can manage their reviews and explore feedback on their listed services. Built with user authentication, CRUD operations, and secure database interactions, this project offers hands-on experience in creating a robust review-sharing platform.",
-            liveSite: "https://service-review-system-clint.web.app",
+            liveSite: "https://service-review-system-client.vercel.app",
             githubClient: "https://github.com/nabishafin/Service-Review-System-Client.git",
             githubServer: "https://github.com/nabishafin/Service-Review-System-Server.git",
             technologies: [
@@ -86,7 +88,7 @@ const ProjectsSection = () => {
                 "Toastify (for notifications)",
                 "Axios"
             ],
-            image: "https://i.ibb.co.com/zhky0s42/service-review-system-clint-web-app-Nest-Hub-Max.png",
+            image: { system }
         },
         {
             name: "Movieverse",
