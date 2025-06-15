@@ -139,7 +139,7 @@ const ProjectsSection = () => {
     return (
         <motion.section
             id='Projects'
-            className="flex flex-col md:flex-row gap-8 p-8 bg-gradient-to-r from-black via-purple-950 to-black"
+            className=" p-0 md:p-16 flex flex-col md:flex-row gap-8  bg-gradient-to-r from-black via-purple-950 to-black"
             initial="hidden"
             animate="visible"
         >
