@@ -38,7 +38,10 @@ const Banner = () => {
                         <span className="text-cyan-400 mr-2">{"</>"}</span>Hey
                     </motion.h4>
                     <motion.h2 className='text-3xl md:text-4xl font-normal text-slate-200 mt-2 leading-tight' variants={itemVariants} key="h2-key">
-                        I'm <span className="text-cyan-400 font-bold">Nabi Shafin,</span><br/>Full-Stack Developer
+                        I'm <button className="hover-btn" data-text="&nbsp;Nabi&nbsp;Shafin,&nbsp;">
+                            <span className="actual-text">&nbsp;Nabi&nbsp;Shafin,&nbsp;</span>
+                            <span aria-hidden="true" className="hover-text">&nbsp;Nabi&nbsp;Shafin,&nbsp;</span>
+                        </button><br/>Full-Stack Developer
                     </motion.h2>
                     <motion.p className="text-slate-400 mt-6 max-w-md font-sans text-sm leading-relaxed" variants={itemVariants} key="p-key">
                         I build flawless digital apps by crafting websites with user-centric approach. If you're looking for a developer that loves to get stuff done.

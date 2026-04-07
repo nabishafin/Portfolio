@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Banner from '../components/Banner';
 import AboutMe from '../components/AboutMe';
@@ -41,8 +42,21 @@ const Home = () => {
         };
     }, []);
 
+    const { scrollYProgress: globalScroll } = useScroll();
+    const globalScaleX = useSpring(globalScroll, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
+
     return (
         <div className='text-slate-300 font-sans selection:bg-cyan-500 selection:text-white min-h-screen relative'>
+            {/* Global Scroll Progress Bar */}
+            <motion.div
+                style={{ scaleX: globalScaleX }}
+                className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-600 to-cyan-400 z-[100] origin-left"
+            />
+
             {/* Infinite Tech Grid Background */}
             <div className="fixed inset-0 bg-[#171717] bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none -z-10"></div>
             

@@ -16,3 +16,48 @@
 .overflow-y-auto::-webkit-scrollbar-thumb:hover {
   background: #00F2FE55;
 }
+
+/* Custom Stroke Reveal Hover Effect */
+.hover-btn {
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  --border-right: 4px;
+  --text-stroke-color: rgba(255, 255, 255, 0.3);
+  --animation-color: #22d3ee; /* Cyan-400 */
+  letter-spacing: 2px;
+  text-decoration: none;
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+  line-height: 1.2;
+  font-weight: 800;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-text-stroke: 1px var(--animation-color);
+  white-space: nowrap;
+}
+
+.actual-text {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+
+.hover-btn:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 15px var(--animation-color));
+}

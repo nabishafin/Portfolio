@@ -1,8 +1,20 @@
 'use client';
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 
 const Education = () => {
+    const containerRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end end"]
+    });
+
+    const scaleY = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
+
     const education = [
         {
             degree: 'B.Sc. in Electrical and Electronic Engineering (EEE)',
@@ -34,7 +46,7 @@ const Education = () => {
     ];
 
     return (
-        <section id="Educations" className="py-20 px-6 sm:px-12 w-full max-w-6xl mx-auto relative overflow-hidden">
+        <section ref={containerRef} id="Educations" className="py-20 px-6 sm:px-12 w-full max-w-6xl mx-auto relative overflow-hidden">
             <div className="flex flex-col items-center mb-16">
                 <motion.h2
                     className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4"
@@ -48,8 +60,14 @@ const Education = () => {
             </div>
 
             <div className="relative">
-                {/* Vertical Timeline Track */}
-                <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-cyan-400/50 via-cyan-400/20 to-transparent transform md:-translate-x-1/2 z-0 hidden sm:block"></div>
+                {/* Vertical Timeline Track (The Background Lane) */}
+                <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] bg-slate-800/30 transform md:-translate-x-1/2 z-0 hidden sm:block"></div>
+                
+                {/* Growing Timeline Line (The Animation) */}
+                <motion.div 
+                    style={{ scaleY }}
+                    className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-cyan-400 via-cyan-400/50 to-transparent origin-top transform md:-translate-x-1/2 z-10 hidden sm:block"
+                ></motion.div>
 
                 <div className="space-y-12">
                     {education.map((edu, index) => (
@@ -93,10 +111,13 @@ const Education = () => {
                                 </div>
                             </div>
 
-                            {/* Timeline Milestone Marker (The Dot) */}
-                            <div className="hidden md:flex flex-none items-center justify-center w-12 h-12 rounded-full bg-[#1c1c1c] border-4 border-cyan-400 z-20 shadow-[0_0_15px_rgba(0,242,254,0.5)]">
+                            {/* Milestone Marker (Centered on line) */}
+                            <div className="absolute left-[-8px] md:left-1/2 md:-translate-x-1/2 top-0 w-12 h-12 rounded-full bg-[#1c1c1c] border-4 border-cyan-400 z-20 shadow-[0_0_15px_rgba(0,242,254,0.5)] flex items-center justify-center">
                                 <img src={edu.imgSrc} alt="" className="w-8 h-8 rounded-full object-cover" />
                             </div>
+
+                            {/* Center Space Holder */}
+                            <div className="hidden md:block w-12 h-12 flex-none translate-x-0"></div>
 
                             {/* Spacer for mobile parity / Desktop Alignment */}
                             <div className="hidden md:block w-[45%]"></div>

@@ -1,8 +1,19 @@
 'use client';
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 
 const Experience = () => {
+    const containerRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end end"]
+    });
+
+    const scaleY = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
     const experiences = [
         {
             company: 'Spark Tech Agency',
@@ -60,7 +71,7 @@ const Experience = () => {
     ];
 
     return (
-        <section id="Experience" className="py-20 px-6 sm:px-12 w-full max-w-6xl mx-auto relative">
+        <section ref={containerRef} id="Experience" className="py-20 px-6 sm:px-12 w-full max-w-6xl mx-auto relative">
             <div className="flex flex-col items-center mb-16">
                 <motion.h2 
                     className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4"
@@ -74,8 +85,14 @@ const Experience = () => {
             </div>
 
             <div className="relative">
-                {/* Vertical Timeline Track */}
-                <div className="absolute left-4 md:left-8 top-0 bottom-0 w-[2px] bg-gradient-to-b from-cyan-400/50 via-cyan-400/20 to-transparent z-0"></div>
+                {/* Vertical Timeline Track (The Background Lane) */}
+                <div className="absolute left-4 md:left-8 top-0 bottom-0 w-[2px] bg-slate-800/30 z-0"></div>
+                
+                {/* Growing Timeline Line (The Animation) */}
+                <motion.div 
+                    style={{ scaleY }}
+                    className="absolute left-4 md:left-8 top-0 bottom-0 w-[2px] bg-gradient-to-b from-cyan-400 via-cyan-400/50 to-transparent origin-top z-10"
+                ></motion.div>
 
                 <div className="space-y-16">
                     {experiences.map((exp, index) => (
@@ -87,8 +104,8 @@ const Experience = () => {
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ duration: 0.6, delay: index * 0.2 }}
                         >
-                            {/* Dot */}
-                            <div className="absolute left-[-2px] md:left-[22px] top-0 w-10 h-10 rounded-full bg-[#1c1c1c] border-4 border-cyan-400 z-10 shadow-[0_0_15px_rgba(0,242,254,0.5)] flex items-center justify-center">
+                            {/* Dot (Centered on line) */}
+                            <div className="absolute left-[-4px] md:left-[12px] top-0 w-10 h-10 rounded-full bg-[#1c1c1c] border-4 border-cyan-400 z-10 shadow-[0_0_15px_rgba(0,242,254,0.5)] flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="text-cyan-400" viewBox="0 0 16 16"><path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5zm1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0zM1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5z"/></svg>
                             </div>
 
