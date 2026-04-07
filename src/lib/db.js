@@ -14,6 +14,16 @@ const ProjectSchema = new mongoose.Schema({
 
 export const Project = mongoose.models.Project || mongoose.model('Project', ProjectSchema);
 
+// Contact Message Schema
+const MessageSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  message: { type: String, required: true },
+  status: { type: String, enum: ['unread', 'read'], default: 'unread' },
+}, { timestamps: true });
+
+export const Message = mongoose.models.Message || mongoose.model('Message', MessageSchema);
+
 // Connection cache
 let cached = global.mongoose;
 if (!cached) {
