@@ -13,6 +13,7 @@ import Footer from '../components/Footer';
 import Contact from '../components/Contact';
 import SocialSidebar from '../components/SocialSidebar';
 import RoutineCode from '../components/RoutineCode';
+import WelcomeToast from '../components/WelcomeToast';
 
 const Home = () => {
     useEffect(() => {
@@ -61,6 +62,9 @@ const Home = () => {
             
             {/* Global Floating Social Sidebar */}
             <SocialSidebar />
+            
+            {/* Session Welcome Message */}
+            <WelcomeToast />
             
             <Footer></Footer>
         </div>
