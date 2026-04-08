@@ -1,6 +1,8 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { HiArrowLeft } from 'react-icons/hi';
 
 const Dashboard = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -107,6 +109,12 @@ const Dashboard = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     className="bg-[#1c1c1c] p-8 rounded-3xl border border-cyan-400/30 w-full max-w-md shadow-2xl"
                 >
+                    <Link 
+                        href="/" 
+                        className="inline-flex items-center gap-2 text-slate-500 hover:text-cyan-400 mb-8 transition-colors text-sm font-mono"
+                    >
+                        <HiArrowLeft size={16} /> Back to Home
+                    </Link>
                     <h1 className="text-3xl font-bold text-white mb-6 text-center">Admin Access</h1>
                     <form onSubmit={handleLogin} className="space-y-4">
                         <input 
@@ -133,7 +141,13 @@ const Dashboard = () => {
                         <h1 className="text-4xl font-bold text-white mb-2">Project Dashboard</h1>
                         <p className="text-slate-500 font-mono">Manage your dynamic portfolio content</p>
                     </div>
-                    <div className="flex gap-4">
+                    <div className="flex flex-wrap gap-4">
+                        <Link 
+                            href="/" 
+                            className="bg-transparent border border-slate-700 hover:border-cyan-400/50 hover:text-cyan-400 px-6 py-3 rounded-full font-mono text-sm transition-all flex items-center gap-2"
+                        >
+                            <HiArrowLeft size={16} /> Home
+                        </Link>
                         <button 
                             onClick={() => setIsFormOpen(true)}
                             className="bg-cyan-500 hover:bg-cyan-400 text-[#171717] px-6 py-3 rounded-full font-bold shadow-lg transition-all"
