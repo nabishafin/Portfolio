@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Mouse Cursor Suppression */
+@media (hover: hover) and (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
 /* Custom thin scrollbar for project descriptions */
 .overflow-y-auto::-webkit-scrollbar {
   width: 4px;
