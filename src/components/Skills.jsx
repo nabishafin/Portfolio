@@ -85,7 +85,7 @@ const Skills = () => {
                     <div 
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
-                        className={`flex flex-col items-center cursor-pointer px-6 py-3 rounded-xl border-2 transition-all duration-300 min-w-[200px] ${
+                        className={`flex flex-col items-center cursor-pointer px-4 py-3 rounded-xl border-2 transition-all duration-300 min-w-[140px] flex-1 sm:flex-none ${
                             activeTab === tab.id 
                             ? 'border-cyan-400 bg-cyan-400/10 shadow-[0_0_15px_rgba(0,242,254,0.15)]' 
                             : 'border-[#2d3748] bg-[#1c1c1c] hover:border-cyan-400/50 hover:bg-[#232323]'

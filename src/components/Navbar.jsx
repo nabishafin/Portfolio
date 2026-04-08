@@ -60,7 +60,10 @@ const Navbar = () => {
                     </div>
                     <a href="#" className="flex items-center gap-2 text-xl font-bold text-slate-200">
                         <span className="text-cyan-400 font-mono tracking-tighter">{"<C/>"}</span>
-                        <span>Nabi Shafin</span>
+                        <span>
+                            <span className="md:hidden">Shafin</span>
+                            <span className="hidden md:inline">Nabi Shafin</span>
+                        </span>
                     </a>
                 </div>
                 <div className="navbar-center hidden lg:flex">

@@ -91,7 +91,7 @@ const ProjectsSection = () => {
             animate="visible"
         >
             <div className="w-full text-center mb-12">
-                <motion.h2 className="text-4xl md:text-5xl font-mono text-cyan-400 font-bold mb-4" variants={itemVariants}>
+                <motion.h2 className="text-3xl sm:text-4xl md:text-5xl font-mono text-cyan-400 font-bold mb-4" variants={itemVariants}>
                     {"<Projects/>"}
                 </motion.h2>
                 <motion.p className="text-slate-400 font-mono text-sm uppercase tracking-widest" variants={itemVariants}>
@@ -125,7 +125,7 @@ const ProjectsSection = () => {
                             {/* Content Container — scrollable description */}
                             <div className="w-full md:w-7/12 flex flex-col justify-between">
                                 <div className="flex flex-col flex-1 overflow-hidden">
-                                    <h3 className="text-3xl font-bold tracking-tight text-white mb-4 group-hover:text-cyan-400 transition-colors">
+                                    <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-4 group-hover:text-cyan-400 transition-colors">
                                         {project.name}
                                     </h3>
                                     {/* Scrollable description */}

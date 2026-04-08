@@ -31,14 +31,14 @@ const Banner = () => {
                 key="text-block-key"
             >
                 <div className="w-full text-center md:text-left mb-6">
-                    <motion.h1 className='text-5xl md:text-7xl font-sans tracking-wide text-slate-100 mb-8' variants={itemVariants} key="h1-key">Developer</motion.h1>
+                    <motion.h1 className='text-4xl sm:text-5xl md:text-7xl font-sans tracking-wide text-slate-100 mb-8' variants={itemVariants} key="h1-key">Developer</motion.h1>
                 </div>
                 <div className="flex flex-col items-start px-2 md:px-8 border-l border-cyan-400/50">
                     <motion.h4 className='text-md md:text-lg font-mono text-slate-400' variants={itemVariants} key="h4-key">
                         <span className="text-cyan-400 mr-2">{"</>"}</span>Hey
                     </motion.h4>
-                    <motion.h2 className='text-3xl md:text-4xl font-normal text-slate-200 mt-2 leading-tight' variants={itemVariants} key="h2-key">
-                        I'm <button className="hover-btn" data-text="&nbsp;Nabi&nbsp;Shafin,&nbsp;">
+                    <motion.h2 className='text-2xl sm:text-3xl md:text-4xl font-normal text-slate-200 mt-2 leading-tight' variants={itemVariants} key="h2-key">
+                        I'm <button className="hover-btn text-2xl sm:text-3xl md:text-4xl" data-text="&nbsp;Nabi&nbsp;Shafin,&nbsp;">
                             <span className="actual-text">&nbsp;Nabi&nbsp;Shafin,&nbsp;</span>
                             <span aria-hidden="true" className="hover-text">&nbsp;Nabi&nbsp;Shafin,&nbsp;</span>
                         </button><br/>Full-Stack Developer
