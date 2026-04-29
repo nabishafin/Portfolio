@@ -27,7 +27,7 @@ const WelcomeToast = () => {
                     initial={{ opacity: 0, x: 100, scale: 0.8 }}
                     animate={{ opacity: 1, x: 0, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
-                    className="fixed bottom-8 right-8 z-[100] max-w-sm w-full md:w-[320px]"
+                    className="fixed bottom-28 right-8 z-[100] max-w-sm w-full md:w-[320px]"
                 >
                     <div className="relative overflow-hidden bg-[#1c1c1c]/90 backdrop-blur-xl border border-cyan-400/30 rounded-2xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                         {/* Background subtle glow */}
