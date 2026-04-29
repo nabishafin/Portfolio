@@ -15,6 +15,7 @@ import Contact from '../components/Contact';
 import SocialSidebar from '../components/SocialSidebar';
 import RoutineCode from '../components/RoutineCode';
 import WelcomeToast from '../components/WelcomeToast';
+import ChatWidget from '../components/ChatWidget';
 
 const Home = () => {
     useEffect(() => {
@@ -81,6 +82,9 @@ const Home = () => {
             
             {/* Session Welcome Message */}
             <WelcomeToast />
+            
+            {/* Real-time Recruiter Chat */}
+            <ChatWidget />
             
             <Footer></Footer>
         </div>
