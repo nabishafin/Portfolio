@@ -9,6 +9,8 @@ const ChatWidget = () => {
     const [inputText, setInputText] = useState('');
     const [sessionId, setSessionId] = useState(null);
     const [unreadCount, setUnreadCount] = useState(0);
+    const [userName, setUserName] = useState('');
+    const [tempName, setTempName] = useState('');
     const messagesEndRef = useRef(null);
 
     // Initialize session ID
@@ -19,7 +21,19 @@ const ChatWidget = () => {
             localStorage.setItem('chat_session_id', storedSession);
         }
         setSessionId(storedSession);
+
+        const storedName = localStorage.getItem('chat_user_name');
+        if (storedName) {
+            setUserName(storedName);
+        }
     }, []);
+
+    const handleNameSubmit = (e) => {
+        e.preventDefault();
+        if (!tempName.trim()) return;
+        localStorage.setItem('chat_user_name', tempName.trim());
+        setUserName(tempName.trim());
+    };
 
     // Fetch messages
     const fetchMessages = async () => {
@@ -78,7 +92,8 @@ const ChatWidget = () => {
                 body: JSON.stringify({
                     sessionId,
                     text: optimisticMsg.text,
-                    sender: 'user'
+                    sender: 'user',
+                    senderName: userName
                 })
             });
             fetchMessages(); // Refresh to get exact timestamp and ID
@@ -97,7 +112,9 @@ const ChatWidget = () => {
                         exit={{ opacity: 0, y: 50, scale: 0.9 }}
                         className="absolute bottom-16 right-0 w-[320px] sm:w-[350px] bg-[#1c1c1c] border border-cyan-400/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[450px]"
                     >
-                        {/* Header */}
+                        {userName ? (
+                            <>
+                                {/* Header */}
                         <div className="bg-[#232323] p-4 border-b border-slate-700 flex justify-between items-center">
                             <div className="flex items-center gap-3">
                                 <div className="relative">
@@ -161,6 +178,37 @@ const ChatWidget = () => {
                                 <IoSend size={16} className="ml-1" />
                             </button>
                         </form>
+                            </>
+                        ) : (
+                            <div className="flex flex-col h-full items-center justify-center p-6 text-center bg-[#171717]">
+                                <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
+                                    <IoCloseOutline size={24} />
+                                </button>
+                                <div className="w-16 h-16 rounded-full bg-cyan-900/30 flex items-center justify-center text-cyan-400 mb-6 border border-cyan-500/30">
+                                    <IoChatbubblesOutline size={32} />
+                                </div>
+                                <h3 className="text-xl font-bold text-white mb-2">Welcome!</h3>
+                                <p className="text-slate-400 text-sm mb-8">Please introduce yourself to start chatting with Nabi.</p>
+                                
+                                <form onSubmit={handleNameSubmit} className="w-full space-y-4">
+                                    <input
+                                        type="text"
+                                        placeholder="Your Name (or Company)"
+                                        className="w-full bg-[#1c1c1c] text-white rounded-xl px-4 py-3 outline-none border border-slate-700 focus:border-cyan-400 transition-colors text-center"
+                                        value={tempName}
+                                        onChange={(e) => setTempName(e.target.value)}
+                                        autoFocus
+                                    />
+                                    <button 
+                                        type="submit"
+                                        disabled={!tempName.trim()}
+                                        className="w-full py-3 rounded-xl bg-cyan-500 text-[#171717] font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-cyan-400 transition-colors shadow-[0_0_15px_rgba(34,211,238,0.2)]"
+                                    >
+                                        Start Chatting
+                                    </button>
+                                </form>
+                            </div>
+                        )}
                     </motion.div>
                 )}
             </AnimatePresence>

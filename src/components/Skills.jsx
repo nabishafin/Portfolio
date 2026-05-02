@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
     SiHtml5, SiCss3, SiJavascript, SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiRedux, 
-    SiNodedotjs, SiExpress, SiMongodb, SiFirebase, SiPostgresql, SiGraphql, SiDocker, SiGit,
+    SiNodedotjs, SiExpress, SiMongodb, SiFirebase, SiGraphql, SiGit,
     SiAmazonwebservices, SiVercel, SiPostman, SiSwagger, SiAntdesign, SiChakraui, SiRadixui, SiReactquery
 } from "react-icons/si";
 import { TbCircleLetterZ } from "react-icons/tb";
@@ -34,10 +34,8 @@ const Skills = () => {
         { name: 'Express.js', role: 'Framework', Icon: SiExpress, hoverColor: 'group-hover:text-white' },
         { name: 'MongoDB', role: 'NoSQL Database', Icon: SiMongodb, hoverColor: 'group-hover:text-[#47A248]' },
         { name: 'JWT', role: 'Auth Service', Icon: SiJavascript, hoverColor: 'group-hover:text-[#d63aff]' },
-        { name: 'PostgreSQL', role: 'Relational DB', Icon: SiPostgresql, hoverColor: 'group-hover:text-[#4169E1]' },
         { name: 'RESTful APIs', role: 'Integration', Icon: SiJavascript, hoverColor: 'group-hover:text-[#00ff88]' },
         { name: 'Zod', role: 'Validation', Icon: TbCircleLetterZ, hoverColor: 'group-hover:text-[#3E67B1]' },
-        { name: 'Docker', role: 'Containers', Icon: SiDocker, hoverColor: 'group-hover:text-[#2496ED]' },
     ];
 
     const toolsSkills = [

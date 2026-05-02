@@ -120,7 +120,7 @@ const AdminChat = () => {
                             >
                                 <div className="flex justify-between items-center mb-1">
                                     <h4 className="text-sm font-bold text-slate-200 truncate">
-                                        Visitor {(session._id || "Unknown").substring(0, 6)}...
+                                        {session.userName || `Visitor ${(session._id || "Unknown").substring(0, 6)}...`}
                                     </h4>
                                     {session.unreadCount > 0 && (
                                         <span className="bg-cyan-500 text-[#171717] text-[10px] font-bold px-2 py-0.5 rounded-full">
@@ -147,7 +147,7 @@ const AdminChat = () => {
                 ) : (
                     <>
                         <div className="p-4 border-b border-slate-800 bg-[#232323]">
-                            <h3 className="text-white font-bold">Chatting with Visitor {(activeSession || "Unknown").substring(0, 6)}...</h3>
+                            <h3 className="text-white font-bold">Chatting with {sessions.find(s => s._id === activeSession)?.userName || `Visitor ${(activeSession || "Unknown").substring(0, 6)}...`}</h3>
                         </div>
                         
                         <div className="flex-1 p-6 overflow-y-auto space-y-4 scrollbar-thin scrollbar-thumb-slate-700">

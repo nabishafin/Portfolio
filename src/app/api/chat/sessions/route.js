@@ -23,6 +23,7 @@ export async function GET(request) {
             {
                 $group: {
                     _id: "$sessionId",
+                    userName: { $max: "$senderName" },
                     lastMessage: { $first: "$text" },
                     lastMessageAt: { $first: "$createdAt" },
                     unreadCount: {

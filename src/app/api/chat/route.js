@@ -46,7 +46,7 @@ export async function POST(request) {
     try {
         await dbConnect();
         const body = await request.json();
-        const { sessionId, text, sender } = body;
+        const { sessionId, text, sender, senderName } = body;
 
         if (!sessionId || !text || !sender) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -56,7 +56,7 @@ export async function POST(request) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const message = await Message.create({ sessionId, text, sender });
+        const message = await Message.create({ sessionId, text, sender, senderName });
         
         return NextResponse.json(message, { status: 201 });
     } catch (error) {
