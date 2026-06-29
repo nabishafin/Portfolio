@@ -252,7 +252,7 @@ const Dashboard = () => {
                             
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <FormInput label="Project Name *" value={form.name} onChange={v => setForm({...form, name: v})} />
-                                <FormInput label="Image URL" value={form.image} onChange={v => setForm({...form, image: v})} />
+                                <ImageUpload value={form.image} onChange={v => setForm({...form, image: v})} />
                                 <FormInput label="Live Site URL" value={form.liveSite} onChange={v => setForm({...form, liveSite: v})} />
                                 <FormInput label="GitHub — Client Side" value={form.githubClient} onChange={v => setForm({...form, githubClient: v})} />
                                 <FormInput label="GitHub — Server Side" value={form.githubServer} onChange={v => setForm({...form, githubServer: v})} />
@@ -288,13 +288,86 @@ const Dashboard = () => {
 const FormInput = ({ label, value, onChange, type="text" }) => (
     <div>
         <label className="block text-xs font-mono uppercase text-slate-500 mb-2 pl-1">{label}</label>
-        <input 
-            type={type} 
+        <input
+            type={type}
             className="w-full bg-[#111] border border-slate-700 p-4 rounded-xl text-white focus:border-cyan-400 outline-none transition-all"
             value={value}
             onChange={e => onChange(e.target.value)}
         />
     </div>
 );
+
+const ImageUpload = ({ value, onChange }) => {
+    const [uploading, setUploading] = useState(false);
+    const [error, setError] = useState('');
+
+    const handleFile = async (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setUploading(true);
+        setError('');
+        try {
+            const data = new FormData();
+            data.append('file', file);
+
+            const res = await fetch('/api/upload', {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('admin_secret')}` },
+                body: data
+            });
+            const json = await res.json();
+
+            if (json.url) {
+                onChange(json.url);
+            } else {
+                setError(json.error || 'Upload failed');
+            }
+        } catch (err) {
+            setError('Network error during upload');
+        } finally {
+            setUploading(false);
+        }
+    };
+
+    return (
+        <div className="md:col-span-2">
+            <label className="block text-xs font-mono uppercase text-slate-500 mb-2 pl-1">Project Image</label>
+            <div className="flex flex-col sm:flex-row gap-4 items-start">
+                {value ? (
+                    <img src={value} alt="Preview" className="w-24 h-24 rounded-xl object-cover border border-slate-700 flex-none" />
+                ) : (
+                    <div className="w-24 h-24 rounded-xl border border-dashed border-slate-700 flex items-center justify-center text-slate-600 text-xs font-mono flex-none">
+                        No image
+                    </div>
+                )}
+
+                <div className="flex-1 w-full space-y-3">
+                    <label className={`flex items-center justify-center gap-2 w-full bg-[#111] border border-slate-700 hover:border-cyan-400 p-4 rounded-xl cursor-pointer transition-all text-sm font-bold ${uploading ? 'opacity-50 pointer-events-none' : ''}`}>
+                        {uploading ? (
+                            <>
+                                <span className="h-4 w-4 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></span>
+                                Uploading...
+                            </>
+                        ) : (
+                            <>⬆ Upload Image</>
+                        )}
+                        <input type="file" accept="image/*" className="hidden" onChange={handleFile} disabled={uploading} />
+                    </label>
+
+                    <input
+                        type="text"
+                        placeholder="...or paste an image URL"
+                        className="w-full bg-[#111] border border-slate-700 p-3 rounded-xl text-white text-sm focus:border-cyan-400 outline-none transition-all"
+                        value={value}
+                        onChange={e => { setError(''); onChange(e.target.value); }}
+                    />
+
+                    {error && <p className="text-red-400 text-xs font-mono">❌ {error}</p>}
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default Dashboard;
