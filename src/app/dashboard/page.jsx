@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { HiArrowLeft } from 'react-icons/hi';
+import { HiArrowLeft, HiChevronUp, HiChevronDown } from 'react-icons/hi';
 import AdminChat from '../../components/AdminChat';
 
 const Dashboard = () => {
@@ -103,6 +103,42 @@ const Dashboard = () => {
         setIsFormOpen(true);
     };
 
+    // Move a project up/down and persist its new serial order
+    const moveProject = async (index, direction) => {
+        const newIndex = direction === 'up' ? index - 1 : index + 1;
+        if (newIndex < 0 || newIndex >= projects.length) return;
+
+        // Swap positions, then re-number every project by its new index
+        const reordered = [...projects];
+        [reordered[index], reordered[newIndex]] = [reordered[newIndex], reordered[index]];
+        const normalized = reordered.map((p, i) => ({ ...p, order: i }));
+
+        setProjects(normalized); // optimistic UI
+
+        // Persist only the projects whose order actually changed
+        const changed = normalized.filter(
+            (p) => p.order !== projects.find((o) => o._id === p._id)?.order
+        );
+        const key = localStorage.getItem('admin_secret');
+        try {
+            await Promise.all(
+                changed.map((p) =>
+                    fetch(`/api/projects/${p._id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${key}`
+                        },
+                        body: JSON.stringify({ order: p.order })
+                    })
+                )
+            );
+        } catch (err) {
+            console.error('Reorder failed:', err);
+            fetchProjects(); // revert to server state on failure
+        }
+    };
+
     if (!isLoggedIn) {
         return (
             <div className="min-h-screen bg-[#171717] flex items-center justify-center p-6">
@@ -201,8 +237,28 @@ const Dashboard = () => {
                             </div>
                         ) : (
                             <div className="grid gap-6">
-                                {projects.map(project => (
+                                {projects.map((project, index) => (
                                     <div key={project._id} className="bg-[#1c1c1c] border border-slate-800 p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-center">
+                                        {/* Serial / Order controls */}
+                                        <div className="flex md:flex-col items-center gap-2 flex-none">
+                                            <button
+                                                onClick={() => moveProject(index, 'up')}
+                                                disabled={index === 0}
+                                                title="Move up"
+                                                className="p-1.5 rounded-lg bg-slate-800 text-slate-400 hover:bg-cyan-500 hover:text-[#171717] transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-slate-800 disabled:hover:text-slate-400"
+                                            >
+                                                <HiChevronUp size={18} />
+                                            </button>
+                                            <span className="text-cyan-400 font-mono font-bold text-sm w-8 text-center">#{index + 1}</span>
+                                            <button
+                                                onClick={() => moveProject(index, 'down')}
+                                                disabled={index === projects.length - 1}
+                                                title="Move down"
+                                                className="p-1.5 rounded-lg bg-slate-800 text-slate-400 hover:bg-cyan-500 hover:text-[#171717] transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-slate-800 disabled:hover:text-slate-400"
+                                            >
+                                                <HiChevronDown size={18} />
+                                            </button>
+                                        </div>
                                         <img src={project.image} alt="" className="w-24 h-24 rounded-xl object-cover border border-slate-700" />
                                         <div className="flex-1 text-center md:text-left">
                                             <h3 className="text-xl font-bold text-white mb-1">{project.name}</h3>
@@ -269,7 +325,11 @@ const Dashboard = () => {
 
                             <button 
                                 onClick={() => {
-                                    const body = { ...form, technologies: form.technologies.split(',').map(t => t.trim()) };
+                                    const body = {
+                                        ...form,
+                                        technologies: form.technologies.split(',').map(t => t.trim()),
+                                        order: editingProject ? form.order : projects.length
+                                    };
                                     if(editingProject) handleAction('PUT', editingProject._id, body);
                                     else handleAction('POST', '', body);
                                 }}
