@@ -118,3 +118,37 @@ export async function POST(request) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
+
+export async function DELETE(request) {
+    try {
+        if (!checkAuth(request)) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
+        const { searchParams } = new URL(request.url);
+        const messageId = searchParams.get('messageId');
+        const sessionId = searchParams.get('sessionId');
+
+        if (!messageId && !sessionId) {
+            return NextResponse.json({ error: 'messageId or sessionId is required' }, { status: 400 });
+        }
+
+        await dbConnect();
+
+        if (messageId) {
+            const deleted = await Message.findByIdAndDelete(messageId);
+            if (!deleted) {
+                return NextResponse.json({ error: 'Message not found' }, { status: 404 });
+            }
+            return NextResponse.json({ message: 'Message deleted successfully', messageId });
+        }
+
+        if (sessionId) {
+            await Message.deleteMany({ sessionId });
+            return NextResponse.json({ message: 'Session deleted successfully', sessionId });
+        }
+    } catch (error) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+}
+

@@ -1,7 +1,21 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { IoSend } from 'react-icons/io5';
+import { IoSend, IoTrashOutline } from 'react-icons/io5';
+import Swal from 'sweetalert2';
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    background: '#1c1c1c',
+    color: '#fff',
+    customClass: {
+        popup: 'border border-cyan-500/30 rounded-xl shadow-2xl font-sans text-sm'
+    }
+});
 
 const AdminChat = () => {
     const [sessions, setSessions] = useState([]);
@@ -99,6 +113,68 @@ const AdminChat = () => {
         }
     };
 
+    const handleDeleteMessage = async (messageId) => {
+        try {
+            const key = localStorage.getItem('admin_secret');
+            const res = await fetch(`/api/chat?messageId=${messageId}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${key}` }
+            });
+            if (res.ok) {
+                setMessages((prev) => prev.filter((m) => m._id !== messageId));
+                fetchSessions();
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Message deleted'
+                });
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Failed to delete message'
+                });
+            }
+        } catch (err) {
+            console.error('Failed to delete message:', err);
+            Toast.fire({
+                icon: 'error',
+                title: 'Error deleting message'
+            });
+        }
+    };
+
+    const handleDeleteSession = async (sessionId, e) => {
+        if (e) e.stopPropagation();
+        try {
+            const key = localStorage.getItem('admin_secret');
+            const res = await fetch(`/api/chat?sessionId=${sessionId}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${key}` }
+            });
+            if (res.ok) {
+                if (activeSession === sessionId) {
+                    setActiveSession(null);
+                    setMessages([]);
+                }
+                fetchSessions();
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Conversation deleted'
+                });
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Failed to delete conversation'
+                });
+            }
+        } catch (err) {
+            console.error('Failed to delete session:', err);
+            Toast.fire({
+                icon: 'error',
+                title: 'Error deleting conversation'
+            });
+        }
+    };
+
     return (
         <div className="flex h-[600px] bg-[#1c1c1c] border border-slate-800 rounded-2xl overflow-hidden mt-6">
             {/* Sidebar (Sessions) */}
@@ -114,24 +190,33 @@ const AdminChat = () => {
                             <div 
                                 key={session._id} 
                                 onClick={() => setActiveSession(session._id)}
-                                className={`p-4 border-b border-slate-800/50 cursor-pointer transition-colors ${
+                                className={`p-4 border-b border-slate-800/50 cursor-pointer transition-colors group/session flex justify-between items-start gap-2 ${
                                     activeSession === session._id ? 'bg-[#2d3748]' : 'hover:bg-[#232323]'
                                 }`}
                             >
-                                <div className="flex justify-between items-center mb-1">
-                                    <h4 className="text-sm font-bold text-slate-200 truncate">
-                                        {session.userName || `Visitor ${(session._id || "Unknown").substring(0, 6)}...`}
-                                    </h4>
-                                    {session.unreadCount > 0 && (
-                                        <span className="bg-cyan-500 text-[#171717] text-[10px] font-bold px-2 py-0.5 rounded-full">
-                                            {session.unreadCount}
-                                        </span>
-                                    )}
+                                <div className="flex-1 min-w-0">
+                                    <div className="flex justify-between items-center mb-1">
+                                        <h4 className="text-sm font-bold text-slate-200 truncate">
+                                            {session.userName || `Visitor ${(session._id || "Unknown").substring(0, 6)}...`}
+                                        </h4>
+                                        {session.unreadCount > 0 && (
+                                            <span className="bg-cyan-500 text-[#171717] text-[10px] font-bold px-2 py-0.5 rounded-full ml-1 flex-none">
+                                                {session.unreadCount}
+                                            </span>
+                                        )}
+                                    </div>
+                                    <p className="text-xs text-slate-400 truncate">{session.lastMessage}</p>
+                                    <span className="text-[10px] text-slate-500 mt-2 block">
+                                        {new Date(session.lastMessageAt).toLocaleString()}
+                                    </span>
                                 </div>
-                                <p className="text-xs text-slate-400 truncate">{session.lastMessage}</p>
-                                <span className="text-[10px] text-slate-500 mt-2 block">
-                                    {new Date(session.lastMessageAt).toLocaleString()}
-                                </span>
+                                <button
+                                    onClick={(e) => handleDeleteSession(session._id, e)}
+                                    className="opacity-0 group-hover/session:opacity-100 transition-opacity text-slate-500 hover:text-red-400 p-1 rounded hover:bg-slate-800/50"
+                                    title="Delete session"
+                                >
+                                    <IoTrashOutline size={16} />
+                                </button>
                             </div>
                         ))
                     )}
@@ -146,19 +231,48 @@ const AdminChat = () => {
                     </div>
                 ) : (
                     <>
-                        <div className="p-4 border-b border-slate-800 bg-[#232323]">
-                            <h3 className="text-white font-bold">Chatting with {sessions.find(s => s._id === activeSession)?.userName || `Visitor ${(activeSession || "Unknown").substring(0, 6)}...`}</h3>
+                        <div className="p-4 border-b border-slate-800 bg-[#232323] flex justify-between items-center">
+                            <h3 className="text-white font-bold truncate pr-4">
+                                Chatting with {sessions.find(s => s._id === activeSession)?.userName || `Visitor ${(activeSession || "Unknown").substring(0, 6)}...`}
+                            </h3>
+                            <button
+                                onClick={() => handleDeleteSession(activeSession)}
+                                className="text-red-400 hover:text-red-300 hover:bg-red-900/30 px-3 py-1.5 rounded-lg text-xs font-bold border border-red-500/20 flex items-center gap-1.5 transition-all flex-none"
+                                title="Delete conversation"
+                            >
+                                <IoTrashOutline size={15} /> Delete Chat
+                            </button>
                         </div>
                         
                         <div className="flex-1 p-6 overflow-y-auto space-y-4 scrollbar-thin scrollbar-thumb-slate-700">
                             {messages.map((msg) => (
-                                <div key={msg._id} className={`flex flex-col ${msg.sender === 'admin' ? 'items-end' : 'items-start'}`}>
-                                    <div className={`max-w-[70%] p-3 rounded-2xl text-sm ${
-                                        msg.sender === 'admin' 
-                                            ? 'bg-cyan-500 text-[#171717] rounded-br-none font-medium' 
-                                            : 'bg-[#2d3748] text-white rounded-bl-none'
-                                    }`}>
-                                        {msg.text}
+                                <div key={msg._id} className={`flex flex-col group/msg ${msg.sender === 'admin' ? 'items-end' : 'items-start'}`}>
+                                    <div className="flex items-center gap-2 max-w-[80%]">
+                                        {msg.sender === 'admin' && (
+                                            <button
+                                                onClick={() => handleDeleteMessage(msg._id)}
+                                                className="opacity-0 group-hover/msg:opacity-100 transition-opacity p-1.5 text-slate-500 hover:text-red-400 rounded hover:bg-slate-800/50"
+                                                title="Delete message"
+                                            >
+                                                <IoTrashOutline size={14} />
+                                            </button>
+                                        )}
+                                        <div className={`p-3 rounded-2xl text-sm ${
+                                            msg.sender === 'admin' 
+                                                ? 'bg-cyan-500 text-[#171717] rounded-br-none font-medium' 
+                                                : 'bg-[#2d3748] text-white rounded-bl-none'
+                                        }`}>
+                                            {msg.text}
+                                        </div>
+                                        {msg.sender !== 'admin' && (
+                                            <button
+                                                onClick={() => handleDeleteMessage(msg._id)}
+                                                className="opacity-0 group-hover/msg:opacity-100 transition-opacity p-1.5 text-slate-500 hover:text-red-400 rounded hover:bg-slate-800/50"
+                                                title="Delete message"
+                                            >
+                                                <IoTrashOutline size={14} />
+                                            </button>
+                                        )}
                                     </div>
                                     <span className="text-[10px] text-slate-500 mt-1 mx-1">
                                         {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -192,3 +306,4 @@ const AdminChat = () => {
 };
 
 export default AdminChat;
+

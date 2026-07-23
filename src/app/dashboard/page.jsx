@@ -4,6 +4,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { HiArrowLeft, HiChevronUp, HiChevronDown } from 'react-icons/hi';
 import AdminChat from '../../components/AdminChat';
+import Swal from 'sweetalert2';
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    background: '#1c1c1c',
+    color: '#fff',
+    customClass: {
+        popup: 'border border-cyan-500/30 rounded-xl shadow-2xl font-sans text-sm'
+    }
+});
 
 const Dashboard = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -88,9 +102,22 @@ const Dashboard = () => {
                 setIsFormOpen(false);
                 setEditingProject(null);
                 setForm({ name: '', description: '', liveSite: '', githubClient: '', githubServer: '', technologies: '', image: '' });
+                Toast.fire({
+                    icon: 'success',
+                    title: method === 'DELETE' ? 'Project deleted' : method === 'PUT' ? 'Project updated' : 'Project added'
+                });
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Action failed'
+                });
             }
         } catch (err) {
             console.error('Action failed:', err);
+            Toast.fire({
+                icon: 'error',
+                title: 'Network error'
+            });
         }
     };
 
@@ -272,7 +299,7 @@ const Dashboard = () => {
                                                 Edit
                                             </button>
                                             <button 
-                                                onClick={() => { if(confirm('Delete project?')) handleAction('DELETE', project._id) }}
+                                                onClick={() => handleAction('DELETE', project._id)}
                                                 className="bg-red-900/20 text-red-500 hover:bg-red-900/40 px-4 py-2 rounded-lg text-sm font-bold transition-all border border-red-500/20"
                                             >
                                                 Delete
