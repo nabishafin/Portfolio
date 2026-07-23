@@ -17,9 +17,9 @@ const BentoCard = ({ children, className }) => (
 const AboutMe = () => {
     return (
         <section id="about-me" className='w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-12 my-16 text-slate-300'>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
+
                 {/* Row 1 */}
                 <BentoCard className="flex flex-col md:col-span-1">
                     <h3 className="text-xl font-semibold text-cyan-400 mb-2">Teamwork</h3>
@@ -40,7 +40,7 @@ const AboutMe = () => {
                 {/* Tall "About Me" box on the right */}
                 <BentoCard className="md:col-span-1 md:row-span-2 flex flex-col">
                     <h3 className="text-xl font-semibold text-cyan-400 mb-8">About Me</h3>
-                    
+
                     <h4 className="text-lg text-white font-medium mb-3">Profile Summary</h4>
                     <p className="text-slate-400 text-[14px] leading-relaxed mb-4">
                         Software Developer with 1+ year of experience in building responsive and user-friendly web applications using HTML, CSS, JavaScript, React, and Next.js. I specialize in writing clean, scalable, and maintainable code with a strong focus on solving real-world problems.
@@ -58,7 +58,7 @@ const AboutMe = () => {
                         <span className="text-cyan-400">|</span>
                         <span>+8801616539735</span>
                     </div>
-                    
+
                     <p className="text-slate-400 text-[14px] leading-relaxed mb-4">
                         Proficient in a versatile modern stack including <span className="text-cyan-400 font-mono">TypeScript</span>, JavaScript, and advanced Front-End frameworks like <span className="text-cyan-400 font-mono">React JS</span> and <span className="text-cyan-400 font-mono">Next JS</span>. I leverage <span className="text-cyan-400 font-mono">Node.js</span> and <span className="text-cyan-400 font-mono">Express.js</span> for building scalable backend architectures and RESTful APIs.
                     </p>

@@ -62,9 +62,9 @@ const Education = () => {
             <div className="relative">
                 {/* Vertical Timeline Track (The Background Lane) */}
                 <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] bg-slate-800/30 transform md:-translate-x-1/2 z-0 hidden sm:block"></div>
-                
+
                 {/* Growing Timeline Line (The Animation) */}
-                <motion.div 
+                <motion.div
                     style={{ scaleY }}
                     className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-cyan-400 via-cyan-400/50 to-transparent origin-top transform md:-translate-x-1/2 z-10 hidden sm:block"
                 ></motion.div>

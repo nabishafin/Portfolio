@@ -41,19 +41,30 @@ const Banner = () => {
                         I'm <button className="hover-btn text-2xl sm:text-3xl md:text-4xl" data-text="&nbsp;Nabi&nbsp;Shafin,&nbsp;">
                             <span className="actual-text">&nbsp;Nabi&nbsp;Shafin,&nbsp;</span>
                             <span aria-hidden="true" className="hover-text">&nbsp;Nabi&nbsp;Shafin,&nbsp;</span>
-                        </button><br/>Full-Stack Developer
+                        </button><br />Full-Stack Developer
                     </motion.h2>
                     <motion.p className="text-slate-400 mt-6 max-w-md font-sans text-sm leading-relaxed" variants={itemVariants} key="p-key">
                         I build flawless digital apps by crafting websites with user-centric approach. If you're looking for a developer that loves to get stuff done.
                     </motion.p>
-                    
-                    <motion.a 
-                        href="#contact"
-                        className="text-cyan-400 mt-8 font-bold font-mono hover:text-cyan-300 flex items-center gap-2 cursor-pointer transition-colors"
-                        variants={itemVariants}
-                    >
-                        Let's Talk <span className="text-slate-500">{"->"}</span>
-                    </motion.a>
+
+                    <motion.div className="flex flex-wrap items-center gap-6 mt-8" variants={itemVariants}>
+                        <a 
+                            href="#contact"
+                            className="text-cyan-400 font-bold font-mono hover:text-cyan-300 flex items-center gap-2 cursor-pointer transition-colors"
+                        >
+                            Let's Talk <span className="text-slate-500">{"->"}</span>
+                        </a>
+                        <a
+                            href="/Mahamodon Nabi Shafin Full Stack Developer -Resume.pdf"
+                            download="Mahamodon Nabi Shafin Full Stack Developer -Resume.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-400/40 px-5 py-2.5 rounded-full font-mono text-sm font-bold flex items-center gap-2 transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,242,254,0.3)]"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+                            <span>Download CV</span>
+                        </a>
+                    </motion.div>
                 </div>
             </motion.div>
 
